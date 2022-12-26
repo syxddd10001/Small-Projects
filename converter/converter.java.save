@@ -1,0 +1,39 @@
+import java.io.*;
+import Java.util.Scanner;
+
+class Main 
+{
+	public static void main(String[] args)
+	{
+
+		Scanner myIn = new Scanner(System.in);
+
+		int inp = myIn.nextInt();
+
+
+
+
+
+	}
+
+
+	public static int converter(int num)
+	{
+		int r;
+
+		do
+		{
+			
+		
+		}
+
+		while
+		{}
+
+		return result;
+
+	}
+
+
+
+}
