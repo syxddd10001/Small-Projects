@@ -11,7 +11,19 @@ class Main
 
 	public static void mainmenu()
 	{
-		//add
+
+		int [] array = create();
+		int x;
+		System.out.println("which number do you want to move to the right?");
+		Scanner myInput = new Scanner(System.in);
+		x = myInput.nextInt();
+		int [] a = moveright(array,x);
+		for (int i = 0; i < a.length;i++)
+		{
+			System.out.print(a[i]+" ");
+		}
+
+
 	}
 
 
@@ -42,19 +54,45 @@ class Main
 	public static int [] moveright(int [] arr, int num)
 	{
 		int temp;
-		boolean hasN = true;
-
-		for (int i = 0; i < arr.length;i++)
+		boolean hasN = false;
+		int i;
+		do
 		{
-			if (arr[i] != num)
+			for (i = 0; i<arr.length-1;i++)
 			{
-				continue;
+				if (arr[i] != num)
+				{
+					hasN = false;
+					continue;
+				}
+				else
+				{
+					if (arr[i+1] == num)
+					{
+						if (hasN = true)
+						{
+							continue;
+							// start here
+
+						}
+						hasN = false;
+						continue;
+					}
+
+					temp = arr[i];
+					arr[i] = arr[i+1];
+					arr[i+1]= temp;
+					hasN = true;
+				}
+
 			}
-			else if (arr[i] == num)
+			if (hasN == false)
 			{
-				//start here
+				break;
 			}
 		}
+
+		while (true);
 		return arr;
 	}
 
