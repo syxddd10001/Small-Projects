@@ -15,7 +15,7 @@ public class Main
     {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         Scanner myInput = new Scanner(System.in);
-        System.out.println("1 for factorial. 2 for fibonacci sequence. 3 to reverse a string. 4 to countdown. 5 to enter a list and reverse it. 6 for conversion from decimal to binary");
+        System.out.println("1 for factorial. 2 for fibonacci sequence. 3 to reverse a string. 4 to countdown. 5 to enter a list and reverse it. 6 for conversion from decimal to binary. 7 to do binary search on a list");
         int user = myInput.nextInt();
 
         if (user == 1)
@@ -237,11 +237,17 @@ public class Main
         return array;
     }
 
-    public static int binSearch(int [] array, int f)
+    public static int binSearch(int [] array, int f) // has issues
     {
+	for (int i = 0; i<array.length;i++)
+	{
+		System.out.print(array[i]+" ");
+	}
+	System.out.println("-");
         int low_index = 0;
-        int high_index = array.length-1;
+        int high_index = array.length;
         int middle_index = low_index + (high_index-low_index)/2;
+	int middle = array.length/2;
         // case 1: [1,2,3,4,5,6,7] length = 7, high index = 6, middle index = 6/2 = 3
         // case 2: [1,2,3,4,5,6] length = 6, last index = 5, middle index = 5/2 = 3
 
@@ -252,7 +258,7 @@ public class Main
 
         else if (array.length == 1)
         {
-            if (array[middle_index] == f)
+            if (array[0] == f)
             {
                 return middle_index;
             }
@@ -263,18 +269,44 @@ public class Main
 
         else
         {
-            int [] sub_array = new int[array.length/2];
+	    int [] sub_array = new int[array.length/2];
+	
+    	    if (f > array[middle_index])
+	    {
+	    	if (array.length%2==1)
+		{
+		
+			System.arraycopy(array,middle+1,sub_array,0,middle);
+			return binSearch(sub_array,f);
+		}
 
-            if (f > array[middle_index])
-            {
-                System.arraycopy(array,middle_index,sub_array,middle_index,sub_array.length);
-                return binSearch(sub_array,f);
-            }
+		else
+		{
+			System.arraycopy(array,middle,sub_array,0,middle);
+			return binSearch(sub_array,f);
+		}
 
-            System.arraycopy(array,0,sub_array,0,sub_array.length);
-            return binSearch(sub_array,f);
-        }
 
+	    }	  
+	    else
+	    {
+	    	if (array.length%2==1)
+		{
+		
+			System.arraycopy(array,0,sub_array,0,middle);
+			return binSearch(sub_array,f);
+		}
+
+		else
+		{
+			System.arraycopy(array,0,sub_array,0,middle-1);
+			return binSearch(sub_array,f);
+		}		
+
+        
+	    }
+
+	}
     }
 
 
