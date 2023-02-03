@@ -236,80 +236,16 @@ public class Main
         }
         return array;
     }
-
-    public static int binSearch(int [] array, int f) // has issues
+    public static int binSearch(int [] array, int a)
     {
-	for (int i = 0; i<array.length;i++)
-	{
-		System.out.print(array[i]+" ");
-	}
-	System.out.println("-");
-        int low_index = 0;
-        int high_index = array.length;
-        int middle_index = low_index + (high_index-low_index)/2;
-	int middle = array.length/2;
-        // case 1: [1,2,3,4,5,6,7] length = 7, high index = 6, middle index = 6/2 = 3
-        // case 2: [1,2,3,4,5,6] length = 6, last index = 5, middle index = 5/2 = 3
+	int index = 0;
 
-        if (array[middle_index] == f)
-        {
-            return middle_index;
-        }
-
-        else if (array.length == 1)
-        {
-            if (array[0] == f)
-            {
-                return middle_index;
-            }
-            return 0000000;
-
-        }
-
-
-        else
-        {
-	    int [] sub_array = new int[array.length/2];
 	
-    	    if (f > array[middle_index])
-	    {
-	    	if (array.length%2==1)
-		{
-		
-			System.arraycopy(array,middle+1,sub_array,0,middle);
-			return binSearch(sub_array,f);
-		}
-
-		else
-		{
-			System.arraycopy(array,middle,sub_array,0,middle);
-			return binSearch(sub_array,f);
-		}
 
 
-	    }	  
-	    else
-	    {
-	    	if (array.length%2==1)
-		{
-		
-			System.arraycopy(array,0,sub_array,0,middle);
-			return binSearch(sub_array,f);
-		}
 
-		else
-		{
-			System.arraycopy(array,0,sub_array,0,middle-1);
-			return binSearch(sub_array,f);
-		}		
 
-        
-	    }
 
-	}
+	return index;
     }
-
-
-
-
 }

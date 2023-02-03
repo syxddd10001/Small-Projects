@@ -9,7 +9,6 @@ int sum_r(int k)
 	if (k>0)
 	{
 		return k+sum_r(k-1);
-
 	}
 	
 	else
@@ -27,8 +26,8 @@ void dump (vector<int> &v)
 }
 int* inArray(int s)
 {
-	static int arr[5];
-	
+	int* arr = new int[s];
+
 	for (int i = 0; i < s; ++i)
 	{
 		int a;
@@ -50,8 +49,7 @@ int linearSearch(int* arr, int k)
 			return i;
 		}
 
-		i++;
-			
+		i++;			
 	}		
 	
 	return 111111; // returns this if nothing is found 	
@@ -83,26 +81,24 @@ int binarySearch(int* arr, int k)
 
 		return binarySearch(arr, k);
 	}
-	
-		
-
-
-	
-
 }	
 
 
-int* bubbleSort(int* array)
+int* bubbleSort(int* array, int s)
 {
-	for (int i = 0; i < sizeof(array); i++)
+	
+	for (int i = 0; i <= s; ++i)
 	{
-		for (int j = 0; j < sizeof(array); j++)
+		for (int j = i; j <= s; ++j)
 		{
 			if (array[i]>array[j])
 			{
+				int temp;
+				temp = array[i];
 				array[i] = array[j];
-			}
-		
+				array[j] = temp;
+				
+			}		
 		}	
 	}
 	return array;
@@ -141,53 +137,68 @@ void implementSearch()
 
 }
 
+void implementSort(int option)
+{
+	int* p;
+	int s; 
+	cout << "enter size: "; 
+	cin >> s; 
+    p = inArray(s);
+	cout << "unsorted array: " << endl;
+	for (int i = 0; i<s; ++i)
+	{
+		cout << *(p + i) << " ";
+	}
+	cout << endl;
+	
+	if (option == 0)
+	{
+		bubbleSort(p,s);
+	}
+	else
+	{
+		NULL;
+	}
+	cout << "sorted array: " << endl;
+	for (int i = 0; i<s; ++i)
+	{
+		cout << *(p + i) << " ";
+	}
+	cout << endl;
+}
+
+
+
+
 int* splitArray(int* arr,int startIndex, int endIndex)
 {
 	endIndex +=1;
 	vector <int> v(arr, arr+sizeof(arr));
-	vector <int> v2(v.begin()+startIndex, v.begin() + endIndex); // 1 is the start of the split and 4 is the end
-	
+	vector <int> v2(v.begin()+startIndex, v.begin() + endIndex); 
+
 	dump(v);
 	cout << endl;
 	dump(v2);
-
-
-
 	return arr; 	
 }
 
+
+
+
 int main()
 {
-
 	// implementSearch
 	// splitArray
 	// dump
 	// linearSearch
 	// inArray
-
-	int* p;
-        p = inArray(5);
-	cout << "unsorted array: " << endl;
-	for (int i = 0; i<sizeof(p); i++)
-	{
-		cout << *(p + i) << " ";
-	}
-	cout << endl;
-	
-	bubbleSort(p);
-
-	
-	cout << "sorted array: " << endl;
-	for (int i = 0; i<sizeof(p); i++)
-	{
-		cout << *(p + i) << " ";
-	}
-	cout << endl;
-
-	
+	// implementSearch
+	int g;
+	cout << "option: " << endl;
+	cin >> g;
+	implementSort(g);
 
 	return 0;
-
 }
 
 
