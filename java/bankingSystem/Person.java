@@ -1,20 +1,19 @@
-package bankingSystem.src;
-
 import java.util.Scanner;
 import java.util.LinkedList;
 
 
 public class Person
 {
-        private final long UID;
+        private final int UID;
         private String firstName;
         private String lastName;
         private int date,month,year;
         private String DOB;
 
-        public Person(long UID, String firstName, String lastName, int date, int month, int year)
+        public Person(int UID, String firstName, String lastName, int date, int month, int year)
         {
                 this.UID = UID;
+                
                 this.firstName = firstName;
                 this.lastName = lastName;
                 this.date = date;
@@ -22,7 +21,7 @@ public class Person
                 this.year = year;
         }
 
-        public long getUID()
+        public int getUID()
         {
                 return UID;
         }
@@ -37,5 +36,9 @@ public class Person
                 return (date+"/"+ month + "/" +year);
         }
 
+        private int authKey()
+        {
+                return 0; 
+        }
         
 }
