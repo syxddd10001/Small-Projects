@@ -7,9 +7,11 @@ class Main
         {
                 //mainMenu();
                 
+                //sample data
+
+                Login log = new Login(1,"");
+                log.signup("Ron", "Denver", (byte)1, (byte)3, (short)1999, "whatisthis");
                 
-                Login login = new Login(3, "joblin");
-                login.authenticate();
 
                 System.out.println("\nPROGRAM RAN SUCCESSFULLY");
         }
@@ -17,8 +19,14 @@ class Main
         public static void mainMenu()
         {
                 Scanner inp = new Scanner(System.in);
-                Person p1 = new Person(0, "Syed","Itefat",29,2,2003);
-                System.out.println(p1.getFullName());
                 
+               
+                
+        }
+
+        public static void loginPromt() throws IOException
+        {
+                Login login = new Login(0, "password");
+                login.authenticate(); // LOGIN PROMT
         }
 }
