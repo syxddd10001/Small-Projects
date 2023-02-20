@@ -9,9 +9,9 @@ class Main
                 
                 //sample data
 
-                Login log = new Login(1,"");
-                log.signup("Ron", "Denver", (byte)1, (byte)3, (short)1999, "whatisthis");
-                
+                Login log = new Login();
+               //log.signup("Von", "Heimer", (byte)2, (byte)5, (short)1992, "pswd");
+                log.readData();
 
                 System.out.println("\nPROGRAM RAN SUCCESSFULLY");
         }

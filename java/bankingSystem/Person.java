@@ -4,7 +4,8 @@ import java.io.Serializable;
 
 public class Person implements Serializable
 {
-        private final int UID;
+        private static final long serialVersionUID = 1L;
+        private int UID;
         private String firstName;
         private String lastName;
         private byte date,month;
@@ -12,6 +13,9 @@ public class Person implements Serializable
         private String DOB;
         private Money money;
         
+        public Person()
+        {}
+
         public Person(int UID, String firstName, String lastName, byte date, byte month, short year)
         {
                 this.UID = UID;

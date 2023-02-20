@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.io.ObjectInput;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -16,9 +17,10 @@ import java.io.ObjectOutputStream;
 
 
 
-public class Login {
+public class Login 
+{
         
-        final int UID;
+        int UID;
         String password;
         
         public Login(int UID, String password)
@@ -27,23 +29,28 @@ public class Login {
                 this.password = password;
         }
         
+        public Login()
+        {
+
+        }
+
         private int lineCount() throws IOException
         {       
-                Path path = Paths.get("loginFile.txt");
+                Path path = Paths.get("loginFile.dat");
                 int n_lines = (int) Files.lines(path).count();
                 return n_lines;
         }
         
         
-        private boolean readFileLOGIN() throws IOException //reading login file
+        private String login() throws IOException //reading login file
         {
                 // read file method
                 // login info stored in a file as <UID:password> (string)
                 String loginX = "";
-                if (UID>lineCount()-1) return false;
+                if (UID>lineCount()-1) return "NO_SUCH_USER";
 
 
-                try(Stream<String> lines = Files.lines(Paths.get("loginfile.txt")))
+                try(Stream<String> lines = Files.lines(Paths.get("loginfile.dat")))
                 {           
                         loginX = lines.skip(UID).findFirst().get();
                 }
@@ -53,15 +60,15 @@ public class Login {
                         System.err.println("not found");
                 }
 
-                if (!(loginX.equals(UID+":"+password))) return false;
+                if (!(loginX.equals(UID+":"+password))) return "WRONG_PASSWORD";
                 
 
-                return true;
+                return UID+":"+password;
         }
 
         public void authenticate() throws IOException
         {           
-               System.out.println(readFileLOGIN());
+               System.out.println(login());
         }
 
 
@@ -79,22 +86,16 @@ public class Login {
                 
                 try 
                 {       
-                        // doesnt work
-                        FileOutputStream f = new FileOutputStream(new File("loginfile.txt"),true);
-                        ObjectOutputStream o = new ObjectOutputStream(f);
-
-                        o.writeObject(person);
+                        // doesnt work 
+                        // IDENTIFIED PROBLEM: the object is writing to an existing object
+                        // corrupting the previous object
+                        Path path = Paths.get("loginFile.dat");
+                        FileOutputStream fileOut = new FileOutputStream(path.toString());
+                        ObjectOutputStream o = new ObjectOutputStream(fileOut);
+                        o.writeObject(user);
                         
                         o.close();
-                        f.close();
-
-                        FileInputStream fi = new FileInputStream(new File("loginfile.txt"));
-                        ObjectInputStream oi = new ObjectInputStream(fi);
-
-                        Person x = (Person) oi.readObject();
-                        System.out.println(x.getDOB());
-
-
+                        
 
                 }
                 catch (FileNotFoundException e)
@@ -104,16 +105,40 @@ public class Login {
                 catch (IOException e)
                 {
                         System.err.println("error initializing stream");
-                }
-                catch (ClassNotFoundException e)
-                {
-                        e.printStackTrace();
-                }
-
-
-
-                
+                }            
                 return user;
+        }
+
+        public void readData() throws IOException
+        {
+                Hashtable p2 = null;
+                try 
+                {
+                        ObjectInputStream input = new ObjectInputStream(new FileInputStream("loginfile.dat"));        
+                        p2 = (Hashtable) input.readObject(); 
+                        input.close();
+                } 
+                catch (IOException e)
+                {
+                        System.err.println("cant open file");
+                }
+                catch (ClassNotFoundException ce)
+                {
+                        System.err.println("class not compatible");
+                }
+
+                String key = login();
+
+
+                try{
+                        Person p = new Person();
+                        p = (Person)p2.get(key);
+                        System.out.println(p.getFullName());
+                }
+                finally
+                {
+                        System.err.println("login error");
+                }
         }
 
         
