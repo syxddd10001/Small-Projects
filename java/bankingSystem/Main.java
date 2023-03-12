@@ -1,22 +1,32 @@
-package bankingSystem;
-
 import java.util.Scanner;
 import java.util.LinkedList;
-
+import java.io.IOException;
 class Main
 {
-        public static void main(String [] args)
+        public static void main(String [] args) throws IOException
         {
-                mainMenu();
+                //mainMenu();
                 
-                System.out.println("SUCCESS");
+                //sample data
+
+                Login log = new Login();
+               //log.signup("Von", "Heimer", (byte)2, (byte)5, (short)1992, "pswd");
+                log.readData();
+
+                System.out.println("\nPROGRAM RAN SUCCESSFULLY");
         }
 
         public static void mainMenu()
         {
                 Scanner inp = new Scanner(System.in);
-                //Person p1 = new Person(0, "Syed","Itefat",29,2,2003);
-                //System.out.println(p1.getFullName());
                 
+               
+                
+        }
+
+        public static void loginPromt() throws IOException
+        {
+                Login login = new Login(0, "password");
+                login.authenticate(); // LOGIN PROMT
         }
 }

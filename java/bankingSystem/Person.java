@@ -1,28 +1,46 @@
-package bankingSystem.src;
-
 import java.util.Scanner;
 import java.util.LinkedList;
+import java.io.Serializable;
 
-
-public class Person
+public class Person implements Serializable
 {
-        private final long UID;
+        private static final long serialVersionUID = 1L;
+        private int UID;
         private String firstName;
         private String lastName;
-        private int date,month,year;
+        private byte date,month;
+        private short year;
         private String DOB;
+        private Money money;
+        
+        public Person()
+        {}
 
-        public Person(long UID, String firstName, String lastName, int date, int month, int year)
+        public Person(int UID, String firstName, String lastName, byte date, byte month, short year)
         {
                 this.UID = UID;
+                
                 this.firstName = firstName;
                 this.lastName = lastName;
                 this.date = date;
                 this.month = month;
                 this.year = year;
+                this.money = money;
+        }
+        // polymorphism
+        public Person(int UID, String firstName, String lastName, byte date, byte month, short year, Money money)
+        {
+                this.UID = UID;
+                
+                this.firstName = firstName;
+                this.lastName = lastName;
+                this.date = date;
+                this.month = month;
+                this.year = year;
+                this.money = money;
         }
 
-        public long getUID()
+        public int getUID()
         {
                 return UID;
         }
@@ -37,5 +55,14 @@ public class Person
                 return (date+"/"+ month + "/" +year);
         }
 
+        public Money getMoney()
+        {
+                return money;
+        }
+
+        private int authKey()
+        {
+                return 0; 
+        }
         
 }
